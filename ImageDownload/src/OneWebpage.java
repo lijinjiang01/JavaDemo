@@ -2,7 +2,6 @@ import java.io.*;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -22,10 +21,13 @@ public class OneWebpage {
 
     public static void main(String[] args) throws Exception {
         String savePath = "images"; // 存储图片地址
-        URL = "https://www.veer.com/topic/913/";
+        URL = "https://max.book118.com/html/2019/0429/8136072030002021.shtm";
         String html = getHTML(URL);
         List<String> imgList = getImageTag(html);
-        for (int i = 1,j = 1;i<imgList.size();i++) {
+        for(String img:imgList){
+            System.out.println(img);
+        }
+        /*for (int i = 1,j = 1;i<imgList.size();i++) {
             try {
                 String imgSrc = getImageSrc(imgList.get(i));
                 if ("".equals(imgSrc)||imgSrc == null){
@@ -40,7 +42,7 @@ public class OneWebpage {
                 e.printStackTrace();
                 break;
             }
-        }
+        }*/
     }
 
     // 获取 html 内容
@@ -74,9 +76,9 @@ public class OneWebpage {
     }
 
     // 获取 img 标签里需要的 src 属性值
-    public static String getImageSrc(String imgUrl) {
+    public static String getImageSrc(String imgTag) {
         String imgSrc = "";
-        Matcher matcher = Pattern.compile(ImgSrc_REG).matcher(imgUrl);
+        Matcher matcher = Pattern.compile(ImgSrc_REG).matcher(imgTag);
         while (matcher.find()) {
             imgSrc=matcher.group().substring(0,matcher.group().length() - 1);
             return imgSrc;
